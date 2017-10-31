@@ -32,12 +32,12 @@ function WaysToChange(x){
   }
   return countWays;
 }
-
-console.assert(WaysToChange(9) === 2, 'ways to change should be 2');
-
-console.assert(WaysToChange(12) === 4, "ways to change should be 4");
-console.assert(WaysToChange(17) === 6, "ways to change should be 6");
-console.assert(WaysToChange(35) === 24, "ways to change should be 24");
+//
+// console.assert(WaysToChange(9) === 2, 'ways to change should be 2');
+//
+// console.assert(WaysToChange(12) === 4, "ways to change should be 4");
+// console.assert(WaysToChange(17) === 6, "ways to change should be 6");
+// console.assert(WaysToChange(35) === 24, "ways to change should be 24");
 
 
 
@@ -53,15 +53,36 @@ console.assert(WaysToChange(35) === 24, "ways to change should be 24");
   //
   // After writing the WaysToChange and WaysToOrder functions, create a series of test cases to check that they give the results you expect. Share test cases with each other and make sure your functions give the same answers.
 //
-// let small = 6;
-// let medium = 9;
-// let large = 20;
-//
-// function WaysToOrder(x){
-//   if(x%small == 0 || x%medium == 0 || x%large == 0){
-//     return "order is possible";
-//   }
-//   return "order is not possible";
-// }
-//
-// console.log(WaysToOrder(26));
+
+// small: 6
+// medium: 9
+// large: 20
+
+function WaysToOrder(x){
+  let countOrders = 0;
+  let large = 0;
+  while(large <= x/20){
+    let medium = 0;
+    while(medium <= (x-large*20)/9){
+      let small = 0;
+      while(small <= (x-(large*20-medium*9))/6){
+        if((x-(large*20+medium*9+small*6)) == 0){
+          console.log('x: ',x,',small: ',small, ',medium: ',medium, ',large: ',large);
+          countOrders++;
+        }
+        small++;
+      }
+      medium++;
+    }
+    large++;
+  }
+  return countOrders;
+}
+console.log(WaysToOrder(5));
+console.assert(WaysToOrder(5) === 0, "ways to order should be 0");
+console.log(WaysToOrder(12));
+console.assert(WaysToOrder(12) === 1, "ways to order should be 1");
+console.log(WaysToOrder(18));
+console.assert(WaysToOrder(18) === 2, "ways to order should be 2");
+console.log(WaysToOrder(30));
+console.assert(WaysToOrder(30) === 2, "ways to order should be 2");
